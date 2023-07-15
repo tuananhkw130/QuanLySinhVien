@@ -1,0 +1,48 @@
+﻿@model doan.Models.MaHocPhan
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Thêm mã học phần</h2>
+    </div>
+    <form method="post" asp-action="Them">
+        <div class="form-group">
+            <label asp-for="MaHP">Mã học phần</label>
+            <input type="text" class="form-control" asp-for="MaHP">
+        </div>
+        <div class="form-group">
+            <label asp-for="TenHP">Tên học phần</label>
+            <input type="text" class="form-control" asp-for="TenHP">
+        </div>
+        <div class="form-group">
+            <label asp-for="PhienBan">Phiên bản</label>
+            <input type="number" class="form-control" asp-for="PhienBan">
+        </div>
+        <div class="form-group">
+            <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+            <label asp-for="IDKhoaVien">Khoa viện</label>
+            <select class="form-control" asp-for="IDKhoaVien" asp-items="@(new SelectList(ViewBag.khoavien, "Value", "Text"))">
+            </select>
+        </div>
+
+        <input type="hidden" name="IDHocKy" value="@ViewBag.kyhoc"/>
+
+        <div class="form-group">
+            <label>Các danh mục điểm</label>
+            @foreach (var item in ViewBag.DSDMDiem)
+            {
+                <div class="custom-control custom-checkbox" style="margin-top: 8px;">
+                    <input type="checkbox" name="DSDMDiem" value="@item.ID" id="DMD-@item.ID" class="custom-control-input">
+                    <label class="custom-control-label" for="DMD-@item.ID">@item.TenDanhMuc</label>
+                </div>
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm</button>
+    </form>
+</main>
+
+@{
+    var summerNote = new doan.Areas.Admin.Models.SummerNote("#MoTa");
+    <partial name="_SummerNote" model="summerNote" />
+}

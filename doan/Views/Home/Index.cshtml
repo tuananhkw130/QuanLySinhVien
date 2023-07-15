@@ -1,0 +1,90 @@
+﻿
+@model IList<MaHocPhan>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+          <li class="breadcrumb-item active">Đăng ký học @ViewBag.TenHocKyDangKy</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                <div class="card-body">
+                  <h5 class="card-title">@TempData["msg"]</h5>
+                  <form method="post" asp-action="CapNhatDangKyHoc">
+                      <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">STT</th>
+                                <th scope="col">Tên Lớp HP</th>
+                                <th scope="col">Mã HP</th>
+                                <th scope="col">Số SV dự kiến</th>
+                                <th scope="col">Số SV đã đăng ký</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int stt = 1;
+                            }
+                            @foreach (var item in Model)
+                            {           
+                                <tr>
+                                    <th></th>
+                                    <th>@stt</th>
+                                    <td>@item.TenHP</td>
+                                    <td>@item.MaHP</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            
+                                int sttlophp = 1;
+                                @foreach (var lophp in item.DSLopHP())
+                                {
+                                    string dadangkyhoc = "";
+                                    @if (lophp.DaDangKyHoc()) {
+                                        dadangkyhoc = "checked";
+                                    }
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" style="cursor: pointer;" class="form-check-input" value="@lophp.ID" name="CheckboxLopHP" @dadangkyhoc>
+                                        </th>
+                                        <th>@stt.@sttlophp</th>
+                                        <td>@lophp.TenLopHP</td>
+                                        <td></td>
+                                        <td>@lophp.SoSVDuKien</td>
+                                        <td>@lophp.SoSVChinhThuc()</td>
+                                    </tr>
+
+                                    sttlophp++;
+                                }
+
+                                stt++;
+                            }
+                        </tbody>
+                      </table>
+                      <button type="submit" class="btn btn-primary float-end">Cập Nhật</button>
+                   </form>
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->

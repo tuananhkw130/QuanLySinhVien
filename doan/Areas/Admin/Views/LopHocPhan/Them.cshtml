@@ -1,0 +1,27 @@
+﻿@model doan.Models.LopHocPhan
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Thêm lớp học phần</h2>
+    </div>
+    <p class="pt-2 pb-2">@TempData["msgtrunglop"]</p>
+    <form method="post" asp-action="Them">
+        <input type="hidden" class="form-control" name="IDMaHocPhan" value="@ViewBag.idhocphan">
+        <div class="form-group">
+            <label asp-for="TenLopHP">Tên lớp học phần</label>
+            <input type="text" class="form-control" asp-for="TenLopHP">
+        </div>
+        <div class="form-group">
+            <label asp-for="SoSVDuKien">Số sinh viên dự kiến</label>
+            <input type="number" class="form-control" asp-for="SoSVDuKien">
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm</button>
+    </form>
+</main>
+
+@{
+    var summerNote = new doan.Areas.Admin.Models.SummerNote("#MoTa");
+    <partial name="_SummerNote" model="summerNote" />
+}

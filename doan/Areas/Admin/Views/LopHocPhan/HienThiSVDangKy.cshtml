@@ -1,0 +1,52 @@
+﻿
+@{
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+	<div class="pagetitle">
+		<h2>Danh sách sinh viên lớp @ViewBag.TenLopHP</h2>
+	</div>
+	<p>
+		<a type="button" class="btn btn-warning" style="margin-right: 14px;" asp-area="Admin" asp-controller="LopHocPhan" asp-action="HienThiSP" asp-route-idhocphan="@ViewBag.IDLopHP">
+			<i class="bi bi-file-earmark-text me-1"></i>Quay lại
+		</a>
+	</p>
+	<section class="section dashboard">
+		<div class="row">
+			<div class="col-12">
+				<div class="card recent-sales overflow-auto">
+					<div class="card-body mt-4">
+
+						<table class="table table-borderless datatable">
+							<thead>
+								<tr>
+									<th class="col-1 text-center">STT</th>
+									<th class="col-3 text-center">Họ tên</th>
+									<th class="col-3 text-center">Mã sinh viên</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								@{
+									int stt = 1;
+								}
+								@foreach (var item in ViewBag.sv)
+								{
+									<tr>
+										<th class="text-center" scope="row">@stt</th>
+										<td>
+											@item.HoTen
+										</td>
+										<td class="ext-center">@item.MSV</td>
+									</tr>
+
+									stt++;
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>

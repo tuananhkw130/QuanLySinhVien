@@ -1,0 +1,58 @@
+﻿@using doan.Models;
+@model IList<MaHocPhan>
+@{
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+	<div class="pagetitle">
+		<h2>Danh sách mã học phần thuộc @ViewBag.kyhocstr</h2>
+	</div>
+	<p>
+		<a type="button" class="btn btn-warning" style="margin-right: 14px;" asp-area="Admin" asp-controller="KyHoc" asp-action="HienThiSP">
+			<i class="bi bi-file-earmark-text me-1"></i>Quay lại
+		</a>
+		<a type="button" class="btn btn-success" asp-area="Admin" asp-controller="MaHocPhan" asp-action="Them" asp-route-kyhoc="@ViewBag.kyhoc">
+			<i class="bi bi-file-earmark-text me-1"></i>Thêm mã học phần
+		</a>
+	</p>
+	<section class="section dashboard">
+		<div class="row">
+			<div class="col-12">
+				<div class="card recent-sales overflow-auto">
+					<div class="card-body mt-4">
+
+						<table class="table table-borderless datatable">
+							<thead>
+								<tr>
+									<th class="col-1 text-center">#</th>
+									<th class="col-3 text-center">Mã học phần</th>
+									<th class="col-1 text-center">Tên học phần</th>
+									<th class="col-1 text-center">Phiên bản</th>
+									<th class="col-2 text-center">Khoa viện</th>
+									<th class="col-3 text-center">Các danh mục điểm</th>
+									<th class="col-1 text-center">Số lớp</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model)
+								{
+									<tr>
+										<th class="text-center" scope="row">@item.ID</th>
+										<td>
+											<a asp-area="Admin" asp-controller="LopHocPhan" asp-action="HienThiSP" asp-route-idhocphan="@item.ID">@item.TenHP</a>
+										</td>
+										<td class="ext-center">@item.MaHP</td>
+										<td class="ext-center">@item.PhienBan</td>
+										<td class="ext-center">@item.KhoaVienStr()</td>
+										<td class="ext-center">@item.DSDMDiem()</td>
+										<td class="ext-center">@item.SoLop()</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>

@@ -1,0 +1,53 @@
+﻿@using doan.Models;
+@model IList<LopHocPhan>
+@{
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+	<div class="pagetitle">
+		<h2>Danh sách lớp học phần</h2>
+	</div>
+	<p>
+		<a type="button" class="btn btn-warning" style="margin-right: 14px;" asp-area="Admin" asp-controller="MaHocPhan" asp-action="HienThiSP" asp-route-kyhoc="@ViewBag.kyhoc">
+			<i class="bi bi-file-earmark-text me-1"></i>Quay lại
+		</a>
+		<a type="button" class="btn btn-success" asp-area="Admin" asp-controller="LopHocPhan" asp-action="Them" asp-route-idhocphan="@ViewBag.idhocphan" >
+			<i class="bi bi-file-earmark-text me-1"></i>Thêm lớp học phần
+		</a>
+	</p>
+	<section class="section dashboard">
+		<div class="row">
+			<div class="col-12">
+				<div class="card recent-sales overflow-auto">
+					<div class="card-body mt-4">
+
+						<table class="table table-borderless datatable">
+							<thead>
+								<tr>
+									<th class="col-1 text-center">#</th>
+									<th class="col-3 text-center">Tên lớp học phần</th>
+									<th class="col-3 text-center">Số sinh viên dự kiến</th>
+									<th class="col-3 text-center">Số sinh viên hiện tại</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model)
+								{
+									<tr>
+										<th class="text-center" scope="row">@item.ID</th>
+										<td>
+											<a asp-area="Admin" asp-controller="LopHocPhan" asp-action="HienThiSVDangKy" asp-route-id="@item.ID">@item.TenLopHP</a>
+										</td>
+										<td class="ext-center">@item.SoSVDuKien</td>
+										<td class="ext-center">@item.SoSVChinhThuc()</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>

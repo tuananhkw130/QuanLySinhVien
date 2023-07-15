@@ -1,0 +1,25 @@
+﻿@model doan.Models.KhoaVien
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Thêm khoa viện</h2>
+    </div>
+    <form method="post" asp-action="Them">
+        <div class="form-group">
+            <label asp-for="MaKhoaVien">Mã khoa viện</label>
+            <input type="text" class="form-control" asp-for="MaKhoaVien">
+        </div>
+        <div class="form-group">
+            <label asp-for="TenKhoaVien">Tên khoa viện</label>
+            <input type="text" class="form-control" asp-for="TenKhoaVien">
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm</button>
+    </form>
+</main>
+
+@{
+    var summerNote = new doan.Areas.Admin.Models.SummerNote("#MoTa");
+    <partial name="_SummerNote" model="summerNote" />
+}
